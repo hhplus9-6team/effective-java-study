@@ -500,6 +500,20 @@ Lombok 에서 제공하는 `@Builder` 를 사용하면 컴파일 타임에 빌�
 
 ---
 
+### 질문
+
+Q. Effective Java에서 제안한 Builder 패턴이 점층적 생성자/자바빈즈 패턴에 비해 가지는 장점은 무엇인가요?
+
+Q. 상속 구조에서 빌더 체이닝이 끊기는 문제를 해결하기 위해 사용하는 기법은 무엇인가요?
+
+Q. 빌더에서 가변 객체(Date, List 등)를 다룰 때 **방어적 복사(defensive copy)**가 필요한 이유는 무엇인가요?
+
+Q. Lombok @Builder를 사용할 때 개발자가 직접 챙겨야 할 부분(제한점)은 무엇인가요?
+
+<br>
+
+---
+
 ### 참고 자료
 
 - Joshua Bloch, Effective Java, 3rd Edition, Item 2
