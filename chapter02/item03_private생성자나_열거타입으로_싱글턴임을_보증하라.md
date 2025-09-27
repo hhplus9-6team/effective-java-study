@@ -1,3 +1,5 @@
+# item03_private생성자나_열거타입으로_싱글턴임을_보증하라
+
 # 싱글턴 패턴 구현 방법
 
 ## 싱글턴이란?
@@ -20,6 +22,45 @@ public class Elvis {
 - 간결함
 
 **주의사항:** 리플렉션 공격 가능 (AccessibleObject.setAccessible 사용)
+
+```java
+import java.lang.reflect.Constructor;
+
+public class ReflectionAttack {
+    public static void main(String[] args) {
+        try {
+            // 정상적인 방법으로 싱글턴 인스턴스 가져오기
+            VulnerableSingleton instance1 = VulnerableSingleton.getInstance();
+            System.out.println("instance1: " + instance1);
+            
+            // 리플렉션으로 private 생성자에 접근
+            Class<VulnerableSingleton> clazz = VulnerableSingleton.class;
+            Constructor<VulnerableSingleton> constructor = clazz.getDeclaredConstructor();
+            
+            // private 생성자를 접근 가능하게 만듦 (보안 위반!)
+            constructor.setAccessible(true);
+            
+            // 새로운 인스턴스 생성 (싱글턴 위반!)
+            VulnerableSingleton instance2 = constructor.newInstance();
+            System.out.println("instance2: " + instance2);
+            
+            VulnerableSingleton instance3 = constructor.newInstance();
+            System.out.println("instance3: " + instance3);
+            
+            // 서로 다른 인스턴스가 생성됨을 확인
+            System.out.println("\n=== 싱글턴 위반 확인 ===");
+            System.out.println("instance1 == instance2: " + (instance1 == instance2));
+            System.out.println("instance2 == instance3: " + (instance2 == instance3));
+            System.out.println("instance1.hashCode(): " + instance1.hashCode());
+            System.out.println("instance2.hashCode(): " + instance2.hashCode());
+            System.out.println("instance3.hashCode(): " + instance3.hashCode());
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
 ### 2. 정적 팩토리 메서드 방식
 
@@ -64,7 +105,7 @@ private Object readResolve() {
 ```
 
 ## 추가설명 
-Q1. 정적 팩토리 메서드 방식에서는 메서드의 **구현부만 변경**하면 되기 때문에 API 변경 없이 싱글턴이 아니게 만들 수 있는 예시는?
+## Q1. 정적 팩토리 메서드 방식에서는 메서드의 **구현부만 변경**하면 되기 때문에 API 변경 없이 싱글턴이 아니게 만들 수 있는 예시는?
 
 
 ### API 변경 없이 싱글턴이 아니게 변경
@@ -116,7 +157,7 @@ public final 필드 방식에서는 `INSTANCE` 필드 자체가 final이므로 �
 
 **핵심**: 정적 팩토리 메서드는 **메서드 호출**을 통해 인스턴스에 접근하므로, 메서드 내부 로직만 바꾸면 클라이언트 코드는 그대로 두고도 동작을 변경할 수 있습니다.
 
-Q2. 제네릭 싱글턴 팩토리는 **타입 안전성을 보장하면서 하나의 객체를 여러 타입으로 활용**할 수 있게 해주는 패턴이라는 예시는?
+# Q2. 제네릭 싱글턴 팩토리는 **타입 안전성을 보장하면서 하나의 객체를 여러 타입으로 활용**할 수 있게 해주는 패턴이라는 예시는?
 
 
 ## 일반적인 예시: Collections.emptySet()
@@ -223,7 +264,6 @@ public class GoodExample<T> {
 ```
 
 **핵심**: 정적 팩토리 메서드는 **메서드 레벨에서 제네릭**을 사용할 수 있기 때문에, 하나의 인스턴스를 여러 타입으로 안전하게 캐스팅해서 반환할 수 있습니다. 이는 메모리 효율성과 타입 안전성을 동시에 제공합니다.
-
 
 ## 예상 질문.
 
