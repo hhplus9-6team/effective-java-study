@@ -1,4 +1,4 @@
-# ITEM01: 생성자 대신 정적 팩터리 메서드를 고려하라
+# item01: 생성자 대신 정적 팩터리 메서드를 고려하라
 
 **클래스의 인스턴스를 얻을 수 있는 방법**
 
@@ -389,10 +389,68 @@ public class Main {
 보통 정적 팩토리 메서드만 제공하는 경우 생성자를 통한 인스턴스 생성을 막는 경우가 많다
 
 ex) Collections는 생성자가 private으로 구현되어 있기 때문에 상속할 수 없다.
+```java
+public class Collections {
+    // 생성자가 private
+    private Collections() {}
+
+    // 정적 메서드들만 제공
+    public static <T> List<T> emptyList() { ... }
+    public static <T> void sort(List<T> list) { ... }
+}
+
+// 이런 상속은 불가능
+// public class MyCollections extends Collections { } // 컴파일 에러!
+```
 
 이 제약은 상속보다 컴포지션을 사용하도록 유도하고, 불변 타입으로 만들려면 이 제약을 지켜야 한다는 점에서 오히려 장점으로 받아들이기도 한다  
-** 컴포지션: 기존 클래스를 확장하는 대신에 새로운 클래스를 만들고 private 필드로 기존 클래스의 인스턴스를 참조하는 방식
 
+```java
+// 정적 팩토리 메서드만 제공하는 클래스
+public class ImmutableList<E> {
+    private ImmutableList() { } // private 생성자
+
+    public static <E> ImmutableList<E> of(E... elements) {
+        // 정적 팩토리 메서드
+        return new ImmutableList<>();
+    }
+}
+
+// 상속 방식 (불가능)
+public class MyList extends ImmutableList { }
+
+// 컴포지션 방식 (권장)
+public class MyList<E> {
+    private final ImmutableList<E> innerList; // 필드로 가지고 있음
+
+    public MyList(ImmutableList<E> list) {
+        this.innerList = list;
+    }
+
+    // 필요한 메서드들을 위임
+    public int size() {
+        return innerList.size();
+    }
+}
+```
+
+> Composition 패턴  
+> : 기존 클래스를 확장하는 대신에 **새로운 클래스를 만들고 private 필드로 기존 클래스의 인스턴스를 참조**하는 방식
+> - 상속(IS-A)이 아닌 포함(HAS-A) 관계 사용
+> - 기존 클래스를 private 필드로 참조 후 메서드 위임(forwarding)
+> ```java
+> public class Car {
+>   private Engine engine;  // 엔진을 필드로 포함 (HAS-A)
+>
+>    public Car(Engine engine) {
+>        this.engine = engine;
+>    }
+>    
+>    public void start() {
+>        engine.start();  // 위임(forwarding)
+>    }
+> }
+> ```
 ### 2. 정적 팩터리 메서드는 프로그래머가 찾기 어렵다.
 - 생성자는 클래스 이름과 동일한 이름을 가지므로 쉽게 찾을 수 있지만, 정적 팩터리 메서드는 이름이 다양하여 찾기 어려울 수 있다
 - 정적 팩터리 메서드의 이름을 잘 짓는 것이 중요하다
