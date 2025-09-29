@@ -335,48 +335,89 @@ public class RomanNumeralValidatorLazy {
 
 **결론**: 대부분의 경우 즉시 초기화가 더 좋다!
 
-#### Map의 어댑터 패턴 예시
 
-**문제가 되는 코드**:
+#### Map의 keySet() 메서드 
+
+**책의 핵심 메시지**:
+- `Map.keySet()`은 뷰(View) 객체를 반환
+- 뷰 객체를 여러 번 만들어도 되지만 그럴 필요도 없고 이득도 없음
+- `HashMap`의 경우 실제로는 싱글턴으로 관리되어 같은 인스턴스 반환
+
+**HashMap의 keySet() 내부 구현**:
 ```java
-public class MapExample {
-    private final Map<String, Object> map = new HashMap<>();
+// HashMap.java 내부
+public class HashMap<K,V> {
+    transient Set<K> keySet;  // keySet 뷰를 저장하는 필드
     
-    // 나쁜 방법: 매번 새로운 Set 생성
-    public Set<String> getKeys() {
-        return new HashSet<>(map.keySet());  // 매번 새로운 Set 객체 생성
-    }
-    
-    public Collection<Object> getValues() {
-        return new ArrayList<>(map.values());  // 매번 새로운 Collection 생성
+    public Set<K> keySet() {
+        Set<K> ks = keySet;
+        if (ks == null) {
+            ks = new KeySet();  // 한 번만 생성
+            keySet = ks;
+        }
+        return ks;  // 항상 같은 객체 반환 (싱글턴)
     }
 }
 ```
 
-**개선된 코드**:
+**KeySet 클래스 내부 구현**:
 ```java
-public class ImprovedMapExample {
-    private final Map<String, Object> map = new HashMap<>();
-    
-    // 어댑터들을 미리 생성해서 재사용
-    private Set<String> keySet;
-    private Collection<Object> valueCollection;
-    
-    public Set<String> getKeys() {
-        if (keySet == null) {
-            keySet = new HashSet<>(map.keySet());
-        }
-        return keySet;  // 같은 Set 재사용
+// HashMap.java 내부
+final class KeySet extends AbstractSet<K> {
+    public Iterator<K> iterator() {
+        return new KeyIterator();  // Map의 내부 구조를 직접 참조
     }
     
-    public Collection<Object> getValues() {
-        if (valueCollection == null) {
-            valueCollection = new ArrayList<>(map.values());
-        }
-        return valueCollection;  // 같은 Collection 재사용
+    public int size() {
+        return size;  // HashMap의 size 필드 직접 참조
+    }
+    
+    public boolean contains(Object o) {
+        return containsKey(o);  // HashMap의 containsKey 메서드 호출
+    }
+    
+    public boolean remove(Object o) {
+        return removeNode(hash(o), o, null, false, true) != null;  // HashMap에서 직접 제거
+    }
+    
+    public void clear() {
+        HashMap.this.clear();  // HashMap 전체 클리어
     }
 }
 ```
+
+**실시간 동기화 원리**:
+- KeySet은 HashMap의 내부 구조를 직접 참조
+- HashMap의 put/remove 시 내부 구조가 변경됨
+- KeySet의 iterator/contains/remove는 변경된 내부 구조를 즉시 반영
+- 별도의 동기화 로직 없이도 실시간 반영
+
+**실제 동작**:
+```java
+Map<String, Object> map = new HashMap<>();
+map.put("A", 1);
+map.put("B", 2);
+
+// keySet() 호출
+Set<String> keys1 = map.keySet();
+Set<String> keys2 = map.keySet();
+
+// 같은 객체인지 확인
+System.out.println(keys1 == keys2);  // true - 같은 인스턴스!
+```
+
+**뷰 객체의 특성**:
+```java
+Set<String> keys = map.keySet();  // [A, B]
+
+// Map에 키 추가
+map.put("C", 3);  // [A, B, C] - 자동 반영!
+
+// Map에서 키 제거
+map.remove("A");  // [B, C] - 자동 반영!
+```
+
+**결론**: Map의 keySet()은 이미 최적화되어 있어서 추가 최적화가 필요 없습니다!
 
 ---
 
