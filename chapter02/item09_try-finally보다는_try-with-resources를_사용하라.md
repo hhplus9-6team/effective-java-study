@@ -128,3 +128,5 @@ public static void main(String[] args) {
     }
 }
 ```
+### 예상질문
+- `try-with-resource`를 사용했을 때의 장점이 뭘까?
