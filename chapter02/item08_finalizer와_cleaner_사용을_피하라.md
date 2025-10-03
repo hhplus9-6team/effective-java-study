@@ -139,3 +139,36 @@ System.exit(0); // "방 청소" 출력 보장 안 됨!
 - **대신 사용**: `AutoCloseable` + `try-with-resources`
 - **예외적 사용**: 안전망 역할 또는 중요하지 않은 네이티브 자원 회수
 - **주의사항**: 사용하더라도 불확실성과 성능 저하 감수해야 함
+
+--------
+
+## 추가 질문 및 예제
+
+### Q: 다음 코드에서 "파일 정리 완료"가 출력될까요?
+
+```java
+public class FileHandler {
+    private static final Cleaner cleaner = Cleaner.create();
+    private final Cleaner.Cleanable cleanable;
+
+    public FileHandler() {
+        State state = new State();
+        this.cleanable = cleaner.register(this, state);
+    }
+
+    private static class State implements Runnable {
+        @Override
+        public void run() {
+            System.out.println("파일 정리 완료");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        new FileHandler();
+        System.out.println("프로그램 종료");
+    }
+}
+```
+--------
