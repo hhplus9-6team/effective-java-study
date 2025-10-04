@@ -189,8 +189,9 @@ public int hashCode() {
 
 equals를 재정의하면 반드시 hashCode도 재정의해야 한다. 그렇지 않으면 프로그램이 제대로 동작하지 않을 것 이다.
 재정의한 hashCode는 Object의 API 문서에 기술된 일반 규약을 따라야 하며, 서로 다른 인스턴스라면 되도록 해시코드도 서로 다르게 구현해야 한다.   
-AutoValue, Lombok를 사용하면 멋진 equals와 hashCode를 자동으로 만들어준다.
+AutoValue 프레임워크를 사용하면 멋진 equals와 hashCode를 자동으로 만들어준다.
 
+\+ Lombok의 @EqualsAndHashCode 어노테이션도 equals와 hashCode를 자동으로 생성해준다.
 
 ---
 
