@@ -86,6 +86,67 @@ System.out.println(phone);
 
 ---
 
+## Lombok @ToString 활용
+
+### **기본 사용법**
+```java
+@Entity
+@ToString  // 이거 하나만 추가!
+public class User {
+    private Long id;
+    private String name;
+    private String email;
+}
+
+```
+
+---
+
+## 주의사항
+
+### **1. 무한참조 위험**
+```java
+// ❌ 위험: 양방향 관계에서 무한참조 발생
+@Entity
+@ToString
+public class User {
+    private List<Order> orders;  // User → Order
+}
+
+@Entity
+@ToString
+public class Order {
+    private User user;  // Order → User (양방향!)
+}
+
+// 해결: exclude 옵션 사용
+@ToString(exclude = {"orders"})
+public class User { ... }
+
+@ToString(exclude = {"user"})
+public class Order { ... }
+```
+
+### **2. 포맷 처리 한계**
+```java
+// ❌ @ToString으로는 포맷 불가능
+@ToString
+public class Order {
+    private LocalDateTime orderDate;  // 2024-01-15T10:30:00
+    private BigDecimal amount;        // 50000.00
+}
+
+// ✅ 수동 toString() 재정의 필요
+@Override
+public String toString() {
+    return String.format("Order(date=%s, amount=%s원)", 
+        orderDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),
+        NumberFormat.getNumberInstance().format(amount));
+}
+```
+
+---
+
 ## 예상 질문
 
 ### toString()을 재정의하면 좋은점?
