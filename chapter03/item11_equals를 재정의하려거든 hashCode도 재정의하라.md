@@ -29,11 +29,15 @@
 </details>
 
 ## hashCode 규약
-
-1. equals 비교 정보가 바뀌지 않았다면 실행 중에는 항상 같은 hashCode를 반환해야 한다.   
+> 원문  
+> The general contract of hashCode is:
+> - Whenever it is invoked on the same object more than once during an execution of a Java application, the hashCode method must consistently return the same integer, provided no information used in equals comparisons on the object is modified. This integer need not remain consistent from one execution of an application to another execution of the same application.
+> - If two objects are equal according to the equals(Object) method, then calling the hashCode method on each of the two objects must produce the same integer result.
+> - It is not required that if two objects are unequal according to the equals(java.lang.Object) method, then calling the hashCode method on each of the two objects must produce distinct integer results. However, the programmer should be aware that producing distinct integer results for unequal objects may improve the performance of hash tables.
+-  equals 비교 정보가 바뀌지 않았다면 실행 중에는 항상 같은 hashCode를 반환해야 한다.   
   (단, 애플리케이션을 다시 실행한다면 이 값이 달라져도 상관없다.)
-2. equals가 두 객체를 같다고 판단하면 반드시 같은 hashCode를 반환해야 한다.
-3. equals가 두 객체를 다르다고 판단했더라도 서로 다른 hashCode를 반환할 필요는 없다. 하지만 해시테이블 성능을 위해 다른 객체에 대해서 다른 값을 반환하는게 좋다.
+-  equals가 두 객체를 같다고 판단하면 반드시 같은 hashCode를 반환해야 한다.
+-  equals가 두 객체를 다르다고 판단했더라도 서로 다른 hashCode를 반환할 필요는 없다. 하지만 해시테이블 성능을 위해 다른 객체에 대해서 다른 값을 반환하는게 좋다.
 
 > [!IMPORTANT]
 > hashCode를 잘못 정의했을 때 **문제가 되는 건 2번 규약**이다.
@@ -200,3 +204,7 @@ AutoValue 프레임워크를 사용하면 멋진 equals와 hashCode를 자동으
 Q1. equals를 재정의할 때 hashCode도 반드시 함께 재정의해야 하는 이유는 무엇인가요?  
 Q2. 해시 함수 구현 시 31을 곱하는 방식이 권장되는 이유는 무엇인가요?  
 Q3. 불변 객체에서 hashCode를 지연 초기화(캐싱)하면 어떤 장점이 있을까요?
+
+---
+## 참고자료
+- https://docs.oracle.com/javase/8/docs/api/java/lang/Object.html
