@@ -263,3 +263,20 @@ root/
 - Gradle 멀티모듈 프로젝트 안에서도 각 서브모듈마다 module-info.java를 추가해 JPMS 모듈로 구성할 수는 있습니다.
   하지만 대부분의 프로젝트는 그렇게 하지 않습니다. 왜냐하면 Spring, Hibernate 같은 프레임워크들이 아직 완전히 호환되지 않기 때문입니다.
 
+---
+
+### 질문
+
+Q. 정보 은닉(캡슐화)의 장점은 어떤 것이 있을까요?
+
+Q. 다음 중 올바른 접근 제한자 설명으로 가장 적절하지 않은 것은?
+1) private : 같은 클래스 안에서만 접근 가능
+2) default(package-private) : 같은 패키지 내 모든 클래스에서 접근 가능
+3) protected : 하위 클래스와 다른 패키지에서도 접근 가능
+4) public : 모든 패키지, 모든 클래스에서 접근 가능
+
+---
+
+### 참고 자료
+
+- Joshua Bloch, Effective Java, 3rd Edition, Item 15
