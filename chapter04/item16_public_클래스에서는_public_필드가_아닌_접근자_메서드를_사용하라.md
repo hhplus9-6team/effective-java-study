@@ -90,7 +90,7 @@ public class Example {
 2. 불변한 상수가 **객체의 속성**인 경우에 한정했다.
 
 ---
-### 1. `static final`은 불변함을 보장하는가?
+### 1. `public final`은 불변함을 보장하는가?
 
 * `final`은 **참조 자체를 바꿀 수 없다는 의미**이지,
   그 **참조가 가리키는 객체의 내용까지 불변이라는 뜻은 아니다.**
@@ -105,7 +105,7 @@ public static final List<String> NAMES = new ArrayList<>();
 즉, `final`만으로는 캡슐화가 완전하지 않다.
 
 ---
-### 2. `static final`이 primitive 타입이면 괜찮은가?
+### 2. `public final`이 primitive 타입이면 괜찮은가?
 ```java
 public final class Time {
     private static final int HOURS_PER_DAY = 24;
@@ -127,7 +127,7 @@ public final class Time {
 - 여기서 이런 단점이 존재하는 경우는 객체의 "상태"를 나타내는 경우를 말했다
 
 ---
-### 3. "상수"는 public 필드 OK
+### 3. "값"은 public 필드 OK
 ```java
 public class PhysicalConstants {
     private PhysicalConstants() {}  // 인스턴스화 방지
