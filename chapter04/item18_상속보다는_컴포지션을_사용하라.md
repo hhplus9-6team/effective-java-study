@@ -146,3 +146,5 @@ System.out.println(s.getAddCount()); // 3 (정상 동작)
   - 다른 객체를 감싸 기능을 덧씌운 클래스
 - 데코레이터 패턴
   - 기존 객체에 새로운 책임(기능)을 동적으로 추가하는 설계 패턴
+
+<details><summary> 참고 자료</summary> https://inpa.tistory.com/entry/OOP-%F0%9F%92%A0-%EA%B0%9D%EC%B2%B4-%EC%A7%80%ED%96%A5%EC%9D%98-%EC%83%81%EC%86%8D-%EB%AC%B8%EC%A0%9C%EC%A0%90%EA%B3%BC-%ED%95%A9%EC%84%B1Composition-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0</details>
