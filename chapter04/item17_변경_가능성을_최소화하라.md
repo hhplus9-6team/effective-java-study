@@ -260,3 +260,12 @@ public void doSomething(BigInteger value) {
 ### 생성자는 불변식 설정이 모두 완료된, 초기화가 완벽히 끝난 상태의 객체를 생성해야한다
 > **생성자와 정적 패터리 외에 어떤 초기화 메서드도 public으로 제공해서는 안된다**
 
+
+## 질문
+Q. 다음 코드의 문제점은 무엇이고, 어떻게 개선할 수 있나요?
+```java
+String result = "";
+for (int i = 0; i < 10000; i++) {
+    result = result + i;  // 매번 새로운 String 객체 생성
+}
+```
