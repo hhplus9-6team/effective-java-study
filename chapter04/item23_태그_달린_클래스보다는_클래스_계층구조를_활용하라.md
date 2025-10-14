@@ -262,3 +262,7 @@ class OrderService {
 | **aggregation** | 집합 관계              | 필드 참조                    | “A는 B를 참조한다.” | 별도 수명 (약함)      | `Team has-a Player`                  |
 | **uses-a**      | 의존 관계              | 파라미터 / 로컬 참조             | “A는 B를 사용한다.” | 일시적             | `OrderService uses-a PaymentGateway` |
 
+---
+## QnA
+Q. 태그 필드의 사용과 비교했을 때, 상속을 통한 계층구조에서 개선되는 점이 무엇인가요?
+Q. is-a 관계에 대한 예시 하나씩 적기(설명 나온거 제외)
