@@ -56,19 +56,19 @@ public final class Complex {
         return im;
     }
 
-    public Complex add(Complex c) {
+    public Complex plus(Complex c) {
         return new Complex(re + c.re, im + c.im);
     }
 
-    public Complex subtract(Complex c) {
+    public Complex minus(Complex c) {
         return new Complex(re - c.re, im - c.im);
     }
 
-    public Complex multiply(Complex c) {
+    public Complex times(Complex c) {
         return new Complex(re * c.re - im * c.im, re * c.im + im * c.re);
     }
 
-    public Complex divide(Complex c) {
+    public Complex dividedBy(Complex c) {
         double tmp = c.re * c.re + c.im * c.im;
         return new Complex((re * c.re + im * c.im) / tmp, (im * c.re - re * c.im) / tmp);
     }
