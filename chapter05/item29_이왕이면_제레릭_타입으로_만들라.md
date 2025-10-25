@@ -126,13 +126,13 @@ public static void main(String[] args) {
     <T extends 상위 타입>
     ```
 
-- 예시: java.util.councurrent.DelayQueue
+- 예시: java.util.concurrent.DelayQueue
     ```java
     public class DelayQueue<E extends Delayed> implements BlockingQueue<E> {
         ...
     }
     ```
-    - `<E extends Delayed>`는 java.util.councurrent.DelayQueue의 하위 타입만 받는다는 뜻
+    - `<E extends Delayed>`는 java.util.concurrent.DelayQueue의 하위 타입만 받는다는 뜻
     - 따라서 DelayQueue 자신과 이를 사용하는 클라이언트는 DelayQueue의 원소에서 형변환 없이 Delayed 클래스 메서드를 호출할 수 있음
         - ClassCastException 발생 가능성 제거
     - 이러한 E를 한정적 타입 매개변수라고함
