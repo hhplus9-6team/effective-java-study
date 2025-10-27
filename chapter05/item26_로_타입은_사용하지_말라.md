@@ -23,7 +23,7 @@
 - 제네릭 관련 용어
 
     용어 | 영문 용어                   | 예시
-      -|-------------------------|-
+    -|-------------------------|-
     매개변수화 타입 | parameterized type      | List\<String>
     실제 타입 매개변수 | actual type parameter   | String
     제네릭 타입 | generic type            | List\<E>
@@ -136,24 +136,36 @@ static int count(List<?> list) {
 #### 상한 한정 (`List<? extends Type>`)
 
 ```java
-List<? extends Number> nums = new ArrayList<Integer>();
-Number n = nums.get(0);  // ✅ 읽기 가능
-nums.add(3.14);          // ❌ 추가 불가
+List<? extends Fruit> list = new ArrayList<Apple>();
+...
+list.get(0);  // ✅ 꺼내기는 안전
+list.add(new Banana());  // ❌ 넣기는 위험
 ```
 
 - Type의 하위 타입만 허용
 - 읽기 전용에 적합 (Producer)
+  - list 의 실제 구현이 ArrayList\<Apple> 인 경우, 꺼내게 되면 무조건 Fruit 이라 가능하지만 넣는 것은 잘못하고 Banana 를 넣는 상황이 발생 가능
+  - 따라서 혹시라도 잘못 넣는 경우를 방지하기 위해 아예 모든 추가를 금지
 
-### 하한 한정 (`List<? super Type>`)
+#### 하한 한정 (`List<? super Type>`)
 
 ```java
-List<? super Integer> ints = new ArrayList<Number>();
-ints.add(10);  // ✅ 추가 가능
-Object obj = ints.get(0); // ❌ 타입 알 수 없음
+List<? super Orange> list = new ArrayList<Fruit>();
+list.add(new Orange());      // ✅ OK (정확히 맞음)
+list.add(new NavelOrange()); // ✅ OK (Orange의 하위 타입)
+list.add(new Fruit());       // ❌ 불가 (Fruit은 Orange의 부모)
+list.add(new Object());      // ❌ 불가 (Object도 Orange의 부모)
+Object x = list.get(0);       // ✅ OK (Object로만 안전)
+Orange y = list.get(0);       // ❌ 컴파일 에러
 ```
 
 - Type의 상위 타입만 허용
 - 쓰기 전용에 적합 (Consumer)
+  - “쓰기 전용” = T를 ‘소비(consume)’하는 쪽으로 쓰기 적합하다는 의미(PECS: Consumer Super). 하지만 상위 타입(Fruit, Object)을 넣을 수 있다는 뜻이 아님
+  - 정확한 구체 타입을 모르는 리스트에다가 Orange를 안전하게 넣고 싶을 때 쓰라고 만든 형태
+  - add(…) 가능: T 또는 T의 하위 타입만 추가 가능 → `add(new Orange())`, `add(new NavelOrange())` ✅ 
+  - add(…) 불가: T의 상위 타입이나 관계없는 타입은 추가 불가 → `add(new Fruit())`, `add(new Object())` ❌ 
+  - get(…)은 Object로만 안전: 꺼낼 때 컴파일러가 확신할 수 있는 건 Object 뿐 → `Object o = list.get(0);` ✅, `Orange o = list.get(0);` ❌
 
 ## 4. 결론
 
