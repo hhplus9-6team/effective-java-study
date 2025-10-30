@@ -749,3 +749,30 @@ messages.put(OrderStatus.READY, "상품 준비 중");
 
 > - 필요한 원소를 컴파일타임에 다 알 수 있는 상수 집합이라면 항상 열거 타입을 사용합시다.
 > - 열거 타입에 정의된 상수 개수가 영원히 고정 불변일 필요는 없습니다.
+
+---
+
+### 질문
+
+Q. int 상수 대신 enum을 사용해야 하는 이유는 무엇일까요?
+
+Q. 다음 switch문 기반 코드가 Enum으로 대체되면 어떤 점이 개선될까요? 그리고 Enum을 사용하도록 리팩터링하려면 어떻게 바꿔야 할까요?
+
+```java
+public static final int PLUS = 0;
+public static final int MINUS = 1;
+
+public static double apply(int op, double x, double y) {
+    switch (op) {
+        case PLUS:  return x + y;
+        case MINUS: return x - y;
+        default: throw new IllegalArgumentException("Unknown op: " + op);
+    }
+}
+```
+
+---
+
+### 참고 자료
+
+- Joshua Bloch, Effective Java, 3rd Edition, Item 34
