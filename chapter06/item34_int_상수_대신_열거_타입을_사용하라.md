@@ -733,7 +733,7 @@ public enum Color {
 - 따라서, 다른 타입의 홀더를 통해 ‘지연 초기화’해서 생성자에서 쓰는 것은 가능합니다.
 
 
-### 5) EnumSet / EnumMap
+### 6) EnumSet / EnumMap
 
 ```java
 EnumSet<OrderStatus> pending = EnumSet.of(OrderStatus.READY, OrderStatus.SHIPPING);
@@ -744,12 +744,6 @@ messages.put(OrderStatus.READY, "상품 준비 중");
 - 열거 타입은 고정된 상수 집합이기 때문에, HashSet이나 HashMap처럼 범용 컬렉션보다 훨씬 효율적인 전용 구현체(EnumSet, EnumMap)를 사용할 수 있습니다.
   - EnumSet은 내부적으로 비트 벡터 기반이라 HashSet보다 훨씬 빠릅니다. 
   - EnumMap은 배열 기반이라 HashMap보다 가볍습니다.
-
-## 3. 결론
-
-> - 필요한 원소를 컴파일타임에 다 알 수 있는 상수 집합이라면 항상 열거 타입을 사용합시다.
-> - 열거 타입에 정의된 상수 개수가 영원히 고정 불변일 필요는 없습니다.
-- 열거 타입은 고정된 상수 집합이기 때문에, HashSet이나 HashMap처럼 범용 컬렉션보다 훨씬 효율적인 전용 구현체(EnumSet, EnumMap)를 사용할 수 있습니다.
 
 ## 3. 결론
 
