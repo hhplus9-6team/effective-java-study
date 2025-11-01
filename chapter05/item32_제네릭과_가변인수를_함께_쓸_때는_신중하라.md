@@ -18,10 +18,10 @@ static void dangerous(List<String>... stringLists) {
 - 위 코드의 문제는, 제네릭 배열이 `Object[]`로 변환되어 서로 다른 제네릭 타입을 혼합할 수 있게 되는 것이다.  
 - 이로 인해 타입 안정성이 완전히 무너진다.
 
+<br>
 
 - 가변인수(varargs)는 호출자가 여러 개의 인수를 넘길 수 있도록 해주는 문법적 편의 기능이다.  
 - 하지만 **가변인수는** <u>내부적으로 배열을 사용하기 때문에</u> **제네릭 타입과 함께 사용하면 타입 안정성이 깨질 수 있다.**
-
 
 ### 경고 발생 이유
 컴파일러는 이런 메서드 선언에 대해 다음과 같은 경고를 발생시킨다:
@@ -36,7 +36,7 @@ warning: [unchecked] Possible heap pollution from parameterized vararg type List
 > - 이런 상황은 곧 `ClassCastException`을 야기한다.
 
 ## 의문점
-Q. 제네릭 varargs 매개변수를 받는 메서드를 선언할 수 있게 한 이유는? 경고로 끝내는 이유는?
+Q. 제네릭 varargs 매개변수를 받는 메서드를 선언할 수 있게 한 이유는? 경고로 끝내는 이유는?  
 A. 실무에서 매우 유용하기 때문..! (생각보다 심플한 이유)
 
 표준 자바 라이브러리에서도 이런 제네릭+가변인수 메서드가 많이 쓰인다:
@@ -92,9 +92,9 @@ static <T> List<T> flatten(List<List<? extends T>> lists) {
 - 이 방법은 배열을 사용하지 않기 때문에 타입 오염이 발생하지 않는다.
 
 ## 퀴즈
-Q. 다음 중 안전한 제네릭 가변인수 메서드의 조건이 아닌 것은? (이유도 설명)
-A) varargs 배열을 수정하지 않는다
-B) varargs 배열을 외부로 노출하지 않는다
-C) varargs 배열을 clone() 후 반환한다
-D) @SafeVarargs로 안전성을 명시한다
+Q. 다음 중 안전한 제네릭 가변인수 메서드의 조건이 아닌 것은? (이유도 설명)  
+A) varargs 배열을 수정하지 않는다  
+B) varargs 배열을 외부로 노출하지 않는다  
+C) varargs 배열을 clone() 후 반환한다  
+D) @SafeVarargs로 안전성을 명시한다  
 
