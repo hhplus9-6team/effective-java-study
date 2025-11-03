@@ -141,8 +141,6 @@ public enum FeeType {
 - 열거 타입은 밖에서 접근할 수 있는 생성자를 제공하지 않으므로 사실상 final 입니다.
 - 열거 타입은 열거 타입의 값끼리 == 연산자로 비교하기 때문에 타입 안정성을 제공합니다.
 
-### 3) 상수별 메서드 구현
-
 ```java
 public enum Operation {
     PLUS, MINUS, MULTIPLY, DIVIDE;
@@ -159,7 +157,7 @@ public enum Operation {
     }
 }
 ```
-
+- Enum 내 메서드 구현을 통해 위와 같이 상수별 동작을 정의할 수 있습니다.
 - switch 문을 사용하는 경우 새로운 상수를 추가하면 해당 case 문을 추가해줘야 합니다.
 - 각 상수의 로직이 한 곳에 몰려 있어 응집도가 낮고, 코드가 길어지며 가독성이 떨어집니다.
 - 그래도 switch문은 상수별 동작을 혼합해 넣을 때 좋은 선택이 될 수 있습니다.
@@ -174,6 +172,8 @@ public enum Operation {
         }
     }
     ```
+
+### 3) 상수별 메서드 구현
 
 ```java
 public enum Operation {
