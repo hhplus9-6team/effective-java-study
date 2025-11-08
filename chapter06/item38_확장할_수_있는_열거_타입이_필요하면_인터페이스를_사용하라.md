@@ -129,3 +129,8 @@ test(Arrays.asList(ExtendedOperation.values()), 2, 4);
 * `switch` 문에서도 사용할 수 없다.
   (열거 상수의 집합이 고정되어 있지 않기 때문)
 * 따라서 “확장 가능성”을 얻는 대신 “컴파일타임 완전성”은 잃게 된다.
+
+## QnA
+- Q1. 이넘타입의 확장을 불가능하게 만든 이유는 무엇일까요?
+- Q2. `<T extends Enum<T> & Operation>` 해석하기
+- Q3. `Collection<? extends Operation>`의 한걔?
