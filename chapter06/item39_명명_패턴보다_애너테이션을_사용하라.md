@@ -128,7 +128,7 @@ public class Sample3 {
 ```java
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@Repeatable(ExceptionTests.class)
+@Repeatable(ExceptionTestContainer.class)
 public @interface ExceptionTestRepeatable {
     Class<? extends Throwable> value();
 }
