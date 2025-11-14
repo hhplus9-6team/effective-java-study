@@ -89,7 +89,7 @@ names.stream()
 
 원소가 n개면 멱집합은 2^n입니다.. 만약 원소가 30개면? 2^30 = 약 10억 개. 메모리에 다 올리면 터집니다.
 
-그래서 "게으른 컬렉션"을 만듭니다.:
+그래서 "전용 컬렉션"을 만듭니다.:
 
 ```java
 public static <E> Collection<Set<E>> powerSet(Set<E> s) {
