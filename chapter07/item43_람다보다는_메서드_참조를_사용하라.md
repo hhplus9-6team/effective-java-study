@@ -126,3 +126,6 @@ interface G extends G1, G2 {}
 ```java
 G g = String::toLowerCase;
 ```
+
+## QnA
+Q. 메서드 참조와 람다 각각 어떤 상황에서 적합한지에 대해 설명하세요
