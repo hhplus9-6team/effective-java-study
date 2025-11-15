@@ -105,6 +105,7 @@ interface G2 {
 }
 interface G extends G1, G2 {}
 ```
+이 경우 G는 **서명은 같지만 반환 타입·예외·타입 매개변수 등이 서로 다른 두 메서드를 동시에 상속**받는다.
 
 위 두 메서드가 하나의 함수형 메서드로 결합되면서 반환 타입은 `Object`와 `String` 중 더 구체적인 `String`으로 수렴하고,  
 예외는 `<E extends Exception>`과 `throws Exception`이 합쳐져 `<F extends Exception> throws F` 형태로 결정된다.
@@ -118,7 +119,6 @@ interface G extends G1, G2 {}
 따라서 G를 함수 타입으로 표현하면  
 `<F extends Exception> () -> String throws F`
 
-이 경우 G는 **서명은 같지만 반환 타입·예외·타입 매개변수 등이 서로 다른 두 메서드를 동시에 상속**받는다.  
 람다식은 “어떤 m()을 구현해야 하는지” 단일하게 결정할 수 없기 때문에 컴파일이 불가능하다.
 
 그러나 메서드 참조는 먼저 **실제 메서드의 시그니처를 기반으로** G1/G2 중 어떤 m()과 일치하는지를 컴파일러가 역으로 결정할 수 있다.
