@@ -50,7 +50,7 @@
 [아이템 29. 이왕이면 제네릭 타입으로 만들라](https://github.com/hhplus9-6team/effective-java-study/issues/53)|[다은](/chapter05/item29_이왕이면_제레릭_타입으로_만들라.md)
 [아이템 30. 이왕이면 제네릭 메서드로 만들라](https://github.com/hhplus9-6team/effective-java-study/issues/54)|[은서](/chapter05/item30_이왕이면_제네릭_메서드로_만들라.md)
 [아이템 31. 한정적 와일드카드를 사용해 API 유연성을 높이라](https://github.com/hhplus9-6team/effective-java-study/issues/61)|[현정](/chapter05/item31_한정적_와일드카드를_사용해_API_유연성을_높이라.md)
-[아이템 32. 제네릭과 가변인수를 함께 쓸 때는 신중하라](https://github.com/hhplus9-6team/effective-java-study/issues/62)|
+[아이템 32. 제네릭과 가변인수를 함께 쓸 때는 신중하라](https://github.com/hhplus9-6team/effective-java-study/issues/62)|[다은](/chapter05/item32_제네릭과_가변인수를_함께_쓸_때는_신중하라.md)
 [아이템 33. 타입 안전 이종 컨테이너를 고려하라](https://github.com/hhplus9-6team/effective-java-study/issues/63)|
 
 ### 6장. 열거 타입과 애너테이션
@@ -61,9 +61,9 @@
 [아이템 36. 비트 필드 대신 EnumSet을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/66)|
 아이템 37. ordinal 인덱싱 대신 EnumMap을 사용하라|
 [아이템 38. 확장할 수 있는 열거 타입이 필요하면 인터페이스를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/74) | [현정](/chapter06/item38_확장할_수_있는_열거_타입이_필요하면_인터페이스를_사용하라.md)
-아이템 39. 명명 패턴보다 애너테이션을 사용하라]|
+[아이템 39. 명명 패턴보다 애너테이션을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/75)|[다은](/chapter06/item39_명명_패턴보다_애너테이션을_사용하라.md)
 아이템 40. @Override 애너테이션을 일관되게 사용하라]|
-아이템 41. 정의하려는 것이 타입이라면 마커 인터페이스를 사용하라]|
+아이템 41. 정의하려는 것이 타입이라면 마커 인터페이스를 사용하라]
 
 ### 7장. 람다와 스트림
 | 아이템 | 발표자료
