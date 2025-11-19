@@ -59,7 +59,7 @@
 [아이템 34. int 상수 대신 열거 타입을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/64)|
 [아이템 35. ordinal 메서드 대신 인스턴스 필드를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/65)|
 [아이템 36. 비트 필드 대신 EnumSet을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/66)|
-아이템 37. ordinal 인덱싱 대신 EnumMap을 사용하라|
+[아이템 37. ordinal 인덱싱 대신 EnumMap을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/73)|[준아](/chapter06/item37_ordinal_인덱싱_대신_EnumMap을_사용하라.md)
 아이템 38. 확장할 수 있는 열거 타입이 필요하면 인터페이스를 사용하라]|
 [아이템 39. 명명 패턴보다 애너테이션을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/75)|[다은](/chapter06/item39_명명_패턴보다_애너테이션을_사용하라.md)
 아이템 40. @Override 애너테이션을 일관되게 사용하라]|
@@ -70,7 +70,7 @@
 :---: | :---:
 아이템 42. 익명 클래스보다는 람다를 사용하라]|
 아이템 43. 람다보다는 메서드 참조를 사용하라]|
-아이템 44. 표준 함수형 인터페이스를 사용하라]|
+[아이템 44. 표준 함수형 인터페이스를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/86)|[준아](/chapter07/item44_표준_함수형_인터페이스를_사용하라.md)
 아이템 45. 스트림은 주의해서 사용하라]|
 아이템 46. 스트림에서는 부작용 없는 함수를 사용하라]|
 아이템 47. 반환 타입으로는 스트림보다 컬렉션이 낫다]|
