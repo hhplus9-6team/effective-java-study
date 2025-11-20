@@ -60,12 +60,10 @@
 [아이템 35. ordinal 메서드 대신 인스턴스 필드를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/65)|
 [아이템 36. 비트 필드 대신 EnumSet을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/66)|
 [아이템 37. ordinal 인덱싱 대신 EnumMap을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/73)|[준아](/chapter06/item37_ordinal_인덱싱_대신_EnumMap을_사용하라.md)
-아이템 38. 확장할 수 있는 열거 타입이 필요하면 인터페이스를 사용하라]|
-아이템 39. 명명 패턴보다 애너테이션을 사용하라]|
-[아이템 40. @Override 애너테이션을 일관되게 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/76)|
+[아이템 38. 확장할 수 있는 열거 타입이 필요하면 인터페이스를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/74) | [현정](/chapter06/item38_확장할_수_있는_열거_타입이_필요하면_인터페이스를_사용하라.md)
 [아이템 39. 명명 패턴보다 애너테이션을 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/75)|[다은](/chapter06/item39_명명_패턴보다_애너테이션을_사용하라.md)
-아이템 40. @Override 애너테이션을 일관되게 사용하라]|
-아이템 41. 정의하려는 것이 타입이라면 마커 인터페이스를 사용하라]|
+[아이템 40. @Override 애너테이션을 일관되게 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/76)|
+아이템 41. 정의하려는 것이 타입이라면 마커 인터페이스를 사용하라]
 
 ### 7장. 람다와 스트림
 | 아이템 | 발표자료
@@ -76,7 +74,7 @@
 아이템 45. 스트림은 주의해서 사용하라]|
 아이템 46. 스트림에서는 부작용 없는 함수를 사용하라]|
 [아이템 47. 반환 타입으로는 스트림보다 컬렉션이 낫다](https://github.com/hhplus9-6team/effective-java-study/issues/89)|[윤경](/chapter07/item47_반환타입으로는_스트림보다_컬렉션이_낫다.md)
-아이템 48. 스트림 병렬화는 주의해서 적용하라]|
+[아이템 48. 스트림 병렬화는 주의해서 적용하라](https://github.com/hhplus9-6team/effective-java-study/issues/90)| [현정](/chapter07/item48_스트림_병렬화는_주의해서_적용하라.md)
 
 ### 8장. 메서드
 | 아이템 | 발표자료
