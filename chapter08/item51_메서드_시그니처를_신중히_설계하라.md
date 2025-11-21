@@ -3,7 +3,11 @@
 
 메서드 시그니처 설계 가이드를 실무 코드로 풀어보겠습니다.
 
-## 핵심 원칙들
+## 핵심 원칙들 :
+- 메서드 이름은 명확하고 일관되게 : API 사용자가 문서 없이도 메서드의 동작을 직관적으로 이해할 수 있게 하기 위함
+- 매개변수 목록 줄이기 : 메서드 호출 시 실수를 줄이고, 가독성을 높이며, 테스트와 유지보수를 쉽게 만들기 위함
+- 인터페이스를 매개변수로 : 유연성을 높여 다양한 구현체를 받을 수 있게 하고, 클라이언트 코드의 변경 없이 구현을 교체할 수 있게 하기 위함
+- Boolean보다 열거 타입 : 코드의 의도를 명확히 표현하고, 향후 옵션 추가가 쉬우며, 타입 안정성을 보장하기 위함
 
 ### 1. 메서드 이름 - 명확하고 일관되게
 
@@ -77,18 +81,27 @@ public class BadListAPI {
 각 기능 조합마다 메서드를 만들면 메서드 수가 기하급수적으로 늘어납니다.
 
 ### 직교성이 높은 설계 (좋은 예)
-
-```java
-// 기본 기능을 원자적으로 분리
-List<String> subList = list.subList(2, 5);  // 기능 1: 부분 리스트 얻기
-int index = subList.indexOf("target");       // 기능 2: 인덱스 찾기
-
-// 이제 다양한 조합이 가능!
-subList.stream().map(String::toUpperCase).collect(toList());  // 대문자 변환
-Collections.sort(subList);                                     // 정렬
-Collections.reverse(subList);                                  // 역순
 ```
+// 3개의 직교적인 기본 기능
+interface DataProcessor {
+// 기능 A: 필터링
+List<String> filter(Predicate<String> predicate);
 
+    // 기능 B: 변환
+    List<String> transform(Function<String, String> transformer);
+    
+    // 기능 C: 정렬
+    List<String> sort(Comparator<String> comparator);
+}
+
+// 이제 정말로 3개 기능으로 7가지 조합 가능:
+// 1. A만 (필터링만)
+// 2. B만 (변환만)  
+// 3. C만 (정렬만)
+// 4. A+B (필터링 후 변환)
+// 5. A+C (필터링 후 정렬)
+// 6. B+C (변환 후 정렬)
+// 7. A+B+C (필터링, 변환, 정렬 모두)
 **3개의 기본 기능으로 7가지 조합 가능:**
 - A만, B만, C만 (3가지)
 - A+B, A+C, B+C (3가지)
@@ -98,7 +111,6 @@ Collections.reverse(subList);                                  // 역순
 
 ### 직교성 낮은 설계
 
-```java
 public class BadDrawingAPI {
     public void drawRedCircle(int x, int y, int radius) { }
     public void drawBlueCircle(int x, int y, int radius) { }
@@ -108,9 +120,8 @@ public class BadDrawingAPI {
     public void drawFilledBlueCircle(int x, int y, int radius) { }
     // 색상 × 도형 × 채우기 = 조합 폭발!
 }
-```
 
-### 직교성 높은 설계
+```
 
 ```java
 public class GoodDrawingAPI {
