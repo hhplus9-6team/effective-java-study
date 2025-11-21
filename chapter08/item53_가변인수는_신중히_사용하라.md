@@ -81,3 +81,6 @@ public static <E extends Enum<E>> EnumSet<E> of(E e1, E e2, E e3, E e4, E e5)
 public static <E extends Enum<E>> EnumSet<E> of(E first, E... rest) // 가변인수 버전
 ```
 - 보통 EnumSet.of(…)는 대부분 1~5개 정도 요소를 넣고 쓰는 경우가 많기 때문에 가변인수 버전 외에 1~5개 요소를 받는 오버로딩 메서드를 미리 만들어두어 성능을 최적화했다
+
+## QnA
+Q. 가변인수 메서드를 사용할 때 주의할 점 + 해결 방법은?
