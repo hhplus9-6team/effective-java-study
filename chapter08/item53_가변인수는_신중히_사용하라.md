@@ -71,7 +71,7 @@ public void foo(int a1, int a2, int a3, int... rest) { } // 여기서만 배열 
 - 이 성능 최적화 패턴은 **항상 적용해야 하는 규칙이 아니며**, API 복잡도가 올라가기 때문에 **가변인수 호출 비용이 실제 성능 병목이 되는 상황에서만 선택적으로 사용해야 한다.** 일반적인 상황에서는 단일 varargs 메서드만으로도 충분하다
 
 ## 추가
-**EnumSet 정적페터리 of 메서드**도 가변인수를 사용하여 열거 타입 집합 생성 비용을 최소화한다
+**EnumSet 정적팩터리 of 메서드**도 가변인수를 사용하여 열거 타입 집합 생성 비용을 최소화한다
 ```java
 public static <E extends Enum<E>> EnumSet<E> of(E e1)
 public static <E extends Enum<E>> EnumSet<E> of(E e1, E e2)
@@ -80,7 +80,7 @@ public static <E extends Enum<E>> EnumSet<E> of(E e1, E e2, E e3, E e4)
 public static <E extends Enum<E>> EnumSet<E> of(E e1, E e2, E e3, E e4, E e5)
 public static <E extends Enum<E>> EnumSet<E> of(E first, E... rest) // 가변인수 버전
 ```
-- 보통 EnumSet.of(…)는 대부분 1~5개 정도 요소를 넣고 쓰는 경우가 많기 때문에 가변인수 버전 외에 1~5개 요소를 받는 오버로딩 메서드를 미리 만들어두어 성능을 최적화했다
+- 보통 EnumSet.of(…)는 대부분 1\~5개 정도 요소를 넣고 쓰는 경우가 많기 때문에 가변인수 버전 외에 1\~5개 요소를 받는 오버로딩 메서드를 미리 만들어두어 성능을 최적화했다
 
 ## QnA
 Q. 가변인수 메서드를 사용할 때 주의할 점 + 해결 방법은?
