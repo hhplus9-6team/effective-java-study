@@ -168,6 +168,32 @@ System.out.println("부모 PID: " + pid);
 | Map의 값으로 쓰지 말 것 | `Map<K, Optional<V>>` → "키 없음" vs "빈 Optional" 혼란 |
 | 컬렉션의 원소로 쓰지 말 것 | `List<Optional<T>>` → 복잡성만 증가 |
 | 박싱된 기본 타입 담지 말 것 | `Optional<Integer>` → `OptionalInt` 사용 |
+* "키 없음" vs "빈 Optional" 혼란 이게 왜 문제일까?
+```java
+Map<String, Optional<String>> userNicknames = new HashMap<>();
+userNicknames.put("김철수", Optional.of("철수짱"));
+userNicknames.put("이영희", Optional.empty());  // 닉네임 없음
+// "박민수"는 아예 put 안 함                    // 얘도 닉네임 없음
+
+// 닉네임 조회할 때
+Optional<String> result1 = userNicknames.get("이영희");  // Optional.empty()
+Optional<String> result2 = userNicknames.get("박민수");  // null
+
+// 처리 로직이 복잡해짐
+public String getNickname(String name) {
+Optional<String> result = userNicknames.get(name);
+
+    if (result == null) {
+        // 키 자체가 없는 경우
+        return "미등록 사용자";
+    } else if (result.isEmpty()) {
+        // 키는 있는데 닉네임이 없는 경우
+        return "닉네임 미설정";
+    } else {
+        return result.get();
+    }
+}
+```
 
 ## 왜 컬렉션은 Optional로 감싸면 안될까?
 ```java
@@ -258,6 +284,7 @@ Optional<Integer> count = Optional.of(100);  // int → Integer → Optional
 OptionalInt count = OptionalInt.of(100);     // 한 겹만
 OptionalLong bigNumber = OptionalLong.of(1_000_000L);
 OptionalDouble ratio = OptionalDouble.of(3.14);
+// 이 전용클래스들은 내부에서 기본타입을 직접 저장해서 박싱 오버헤드가 없습니다.
 ```
 
 ---
