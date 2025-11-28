@@ -145,11 +145,16 @@ if (parent.isPresent()) {
 }
 
 // 좋은 예: map() 활용
+// parent가 값이 있으면: h.pid() 실행해서 새 Optional로 감싸줌
+// parent가 비었으면: 그냥 빈 Optional 반환 (람다 실행 안 함)
 String pid = ph.parent()
                .map(h -> String.valueOf(h.pid()))
                .orElse("N/A");
 System.out.println("부모 PID: " + pid);
 ```
+- 코드가 짧다.
+- get()을 직접 호출하지 않는다. 값이 없으면 예외가 터지기 때문
+- 실수할 가능성이 줄어든다.
 
 ---
 
