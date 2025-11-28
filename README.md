@@ -68,6 +68,8 @@
 ### 7장. 람다와 스트림
 | 아이템 | 발표자료
 :---: | :---:
+아이템 42. 익명 클래스보다는 람다를 사용하라]|
+[아이템 43. 람다보다는 메서드 참조를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/85)|[다은](/chapter07/item43_람다보다는_메서드_참조를_사용하라.md)
 [아이템 42. 익명 클래스보다는 람다를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/78)|[노아](/chapter07/item42_익명_클래스보다는_람다를_사용하라.md)
 아이템 43. 람다보다는 메서드 참조를 사용하라]|
 아이템 44. 표준 함수형 인터페이스를 사용하라]|
@@ -85,6 +87,8 @@
 아이템 50. 적시에 방어적 복사본을 만들라]|
 아이템 51. 메서드 시그니처를 신중히 설계하라]|
 아이템 52. 다중정의는 신중히 사용하라]|
+[아이템 53. 가변인수는 신중히 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/100)|[다은](/chapter08/item53_가변인수는_신중히_사용하라.md)
+아이템 54. null이 아닌, 빈 컬렉션이나 배열을 반환하라]|
 아이템 53. 가변인수는 신중히 사용하라]|
 [아이템 54. null이 아닌, 빈 컬렉션이나 배열을 반환하라](https://github.com/hhplus9-6team/effective-java-study/issues/101)|[준아](/chapter08/item54_null이_아닌,_빈_컬렉션이나_배열을_반환하라.md)
 아이템 55. 옵셔널 반환은 신중히 하라]|
