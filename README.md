@@ -83,7 +83,7 @@
 :---: | :---:
 아이템 49. 매개변수가 유효한지 검사하라]|
 [아이템 50. 적시에 방어적 복사본을 만들라](https://github.com/hhplus9-6team/effective-java-study/issues/97)|[현정](/chapter08/item50_적시에_방어적_복사본을_만들라.md)
-아이템 51. 메서드 시그니처를 신중히 설계하라]|
+[아이템 51. 메서드 시그니처를 신중히 설계하라](https://github.com/hhplus9-6team/effective-java-study/issues/98)|[윤경](/chapter08/item51_메서드_시그니처를_신중히_설계하라.md)
 아이템 52. 다중정의는 신중히 사용하라]|
 [아이템 53. 가변인수는 신중히 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/100)|[다은](/chapter08/item53_가변인수는_신중히_사용하라.md)
 아이템 54. null이 아닌, 빈 컬렉션이나 배열을 반환하라]|
