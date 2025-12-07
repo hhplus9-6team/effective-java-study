@@ -61,3 +61,6 @@ for (long i = 0; i < Integer.MAX_VALUE; i++) {
 ```java
 OptionalInt는 기본 타입을 지원하기 위해 별도로 제공된다.
 ```
+
+## QnA
+* 박싱된 기본 타입보다 기본타입을 사용해야하는 이유 3가지?
