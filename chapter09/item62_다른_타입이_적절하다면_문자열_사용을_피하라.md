@@ -152,19 +152,50 @@ record OrderUserKey(String orderId, String userId) {}
 #### 문제점
 
 ```java
-ThreadLocal<String> auth = new ThreadLocal<>();
-auth.set("USER_AUTH");
+ThreadLocal<String> context1 = new ThreadLocal<>();
+ThreadLocal<String> context2 = new ThreadLocal<>();
+
+context1.set("USER_AUTH");
+context2.set("USER_AUTH");
 ```
 
-- 문자열은 ThreadLocal의 “키”가 아닙니다.
-  - ThreadLocal은 ThreadLocal 객체 자체가 키이며, 문자열은 단순한 값일 뿐이라, `"USER_AUTH"`는 아무런 구분 기능을 하지 못합니다.
-  - 이로 인해 ThreadLocal 인스턴스를 여러 개 만들면 어디에 어떤 값이 들어가는 파악이 어렵고, 의도치 않은 충돌이나 중복된 ThreadLocal 생성이 가능합니다.
+```
+ThreadLocalMap:
+  Entry 1: key = context1(ThreadLocal@A), value = "USER_AUTH"
+  Entry 2: key = context2(ThreadLocal@B), value = "USER_AUTH"
+```
+
+- 문자열은 타입 구분이 없으므로 컴파일러가 오타를 검사하지 못합니다.
+  - `"USER_AUTH"`, `"USRE_AUTH"` (오타) 모두 허용
+  - IDE의 자동완성, 컴파일 검증이 불가합니다.
+  - 어떤 형태가 유효한 값인지 코드에서 드러나지 않습니다.
 
 - 문자열은 도메인 의미를 표현하지 못합니다.
-  - `"USER_AUTH"`, `"ADMIN"`, `"USRE_AUTH"` (오타) 모두 허용됩니다.
-  - 어떤 형태가 유효한 값인지 코드에서 드러나지 않습니다.
-  - IDE의 자동완성, 컴파일 검증이 불가합니다.
   - 정책 변경 시 문자열이 흩어져 있어서 수정이 어렵습니다.
+
+- 문자열은 ThreadLocal의 “키”가 아니므로 ThreadLocal을 여러 개 만들면 혼란이 커진다.
+  - ThreadLocal은 ThreadLocal 객체 자체가 키이며, 문자열은 단순한 값일 뿐이라, `"USER_AUTH"`는 아무런 구분 기능을 하지 못함
+  - 둘은 전혀 다른 저장소를 갖는데 개발자가 `"USER_AUTH"`라는 문자열만 보고 같은 역할이라고 착각하기 쉬움
+  
+```java
+// 스레드 A
+ThreadLocal<String> a = new ThreadLocal<>();
+a.set("ADMIN");
+String v1 = a.get();  // "ADMIN"
+
+// 스레드 B
+ThreadLocal<String> b = new ThreadLocal<>();
+b.set("ADMIN");
+String v2 = b.get();  // "ADMIN"
+```
+```java
+if (v1 == v2) { // true
+    // 둘은 같은 권한인가?
+}
+```
+- 둘 다 "ADMIN" 리터럴이므로 String Pool에서 같은 객체를 참조하여, 마치 같은 “권한 타입”인 것처럼 보입니다.
+- ThreadLocal은 key(storage)가 전혀 다르고, 각각 다른 문맥(context)에서 나온 값이며, 스레드별로 분리된 저장 공간인데, 문자열 값이 같다는 이유만으로 두 권한을 동일하게 간주해버리는 버그가 만들어집니다.
+
 
 #### 대안
 
