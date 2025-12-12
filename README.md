@@ -97,14 +97,14 @@
 :---: | :---:
 [아이템 57. 지역변수의 범위를 최소화하라](https://github.com/hhplus9-6team/effective-java-study/issues/119)|            [노아](/chapter09/item57_지역변수의_범위를_최소화하라.md)  
 아이템 58. 전통적인 for 문보다는 for-each 문을 사용하라]|
-아이템 59. 라이브러리를 익히고 사용하라]|
+[아이템 59. 라이브러리를 익히고 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/111)|[다은](/chapter09/item59_라이브러리를_익히고_사용하라.md)
 [아이템 60. 정확한 답이 필요하다면 float와 double은 피하라](https://github.com/hhplus9-6team/effective-java-study/issues/112)|[준아](/chapter09/item60_정확한_답이_필요하다면_float와_double은_피하라.md)
 아이템 61. 박싱된 기본 타입보다는 기본 타입을 사용하라]|
-아이템 62. 다른 타입이 적절하다면 문자열 사용을 피하라]|
-[아이템 63. 문자열 연결은 느리니 주의하라](https://github.com/hhplus9-6team/effective-java-study/issues/131)|            [노아](/chapter09/item63_문자열 연결은 느리니 주의하라.md)  
+[아이템 62. 다른 타입이 적절하다면 문자열 사용을 피하라](https://github.com/hhplus9-6team/effective-java-study/issues/122)|[준아](/chapter09/item62_다른_타입이_적절하다면_문자열_사용을_피하라.md)
+아이템 63. 문자열 연결은 느리니 주의하라]|
 아이템 64. 객체는 인터페이스를 사용해 참조하라]|
 아이템 65. 리플렉션보다는 인터페이스를 사용하라]|
-아이템 66. 네이티브 메서드는 신중히 사용하라]|
+[아이템 66. 네이티브 메서드는 신중히 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/126)|[다은](/chapter09/item66_네이티브_메서드는_신중히_사용하라.md)
 아이템 67. 최적화는 신중히 하라]|
 아이템 68. 일반적으로 통용되는 명명 규칙을 따르라]|
 
