@@ -37,7 +37,7 @@ java.lang.Object
 - 컴파일러가 꼭 처리하도록 강제하는 예외
 - `try-catch` 또는 `throws`가 필수
 - API 설계자가 "호출하는 쪽에서 이 상황을 처리해야 한다"고 메시지를 주는 것
-- 예 : `IOException`, `SQLException`, `ParseExceptoin`
+- 예 : `IOException`, `SQLException`, `ParseException`
 
 #### 복구할 수 있는 상황이란?
 
@@ -144,7 +144,7 @@ Error | JVM 레벨 에러 | 개발자가 건드리는 영역 아님
 
 ### 질문
 
-Q. 다음 4가지 상황에서 각각 어떤 예외가 적절한가요?
+Q. 다음 4가지 상황에서 각각 어떤 예외가 적절한가요? (CheckedException, RuntimeException, Error 중에 선택)
 
 A) 외부 시스템이 일시적으로 다운됨 → ? 
 
