@@ -66,22 +66,22 @@
 아이템 41. 정의하려는 것이 타입이라면 마커 인터페이스를 사용하라]
 
 ### 7장. 람다와 스트림
-| 아이템 | 발표자료
-:---: | :---:
-아이템 42. 익명 클래스보다는 람다를 사용하라]|
-[아이템 43. 람다보다는 메서드 참조를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/85)|[다은](/chapter07/item43_람다보다는_메서드_참조를_사용하라.md)
-[아이템 42. 익명 클래스보다는 람다를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/78)|[노아](/chapter07/item42_익명_클래스보다는_람다를_사용하라.md)
+| 아이템 |                               발표자료                               
+:---: |:----------------------------------------------------------------:
+[아이템 42. 익명 클래스보다는 람다를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/82) | [노아](/chapter07/item42_익명_클래스보다는_람다를_사용하라.md)
+[아이템 43. 람다보다는 메서드 참조를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/85)|          [다은](/chapter07/item43_람다보다는_메서드_참조를_사용하라.md)           
+[아이템 42. 익명 클래스보다는 람다를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/78)|          [노아](/chapter07/item42_익명_클래스보다는_람다를_사용하라.md)           
 아이템 43. 람다보다는 메서드 참조를 사용하라]|
-[아이템 45. 스트림은 주의해서 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/87)|[노아](/chapter07/item45_스트림은_주의해서_사용하라.md)
-[아이템 44. 표준 함수형 인터페이스를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/86)|[준아](/chapter07/item44_표준_함수형_인터페이스를_사용하라.md)
+[아이템 45. 스트림은 주의해서 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/87)|            [노아](/chapter07/item45_스트림은_주의해서_사용하라.md)             
+[아이템 44. 표준 함수형 인터페이스를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/86)|          [준아](/chapter07/item44_표준_함수형_인터페이스를_사용하라.md)           
 아이템 46. 스트림에서는 부작용 없는 함수를 사용하라]|
-[아이템 47. 반환 타입으로는 스트림보다 컬렉션이 낫다](https://github.com/hhplus9-6team/effective-java-study/issues/89)|[윤경](/chapter07/item47_반환타입으로는_스트림보다_컬렉션이_낫다.md)
-[아이템 48. 스트림 병렬화는 주의해서 적용하라](https://github.com/hhplus9-6team/effective-java-study/issues/90)| [현정](/chapter07/item48_스트림_병렬화는_주의해서_적용하라.md)
+[아이템 47. 반환 타입으로는 스트림보다 컬렉션이 낫다](https://github.com/hhplus9-6team/effective-java-study/issues/89)|         [윤경](/chapter07/item47_반환타입으로는_스트림보다_컬렉션이_낫다.md)         
+[아이템 48. 스트림 병렬화는 주의해서 적용하라](https://github.com/hhplus9-6team/effective-java-study/issues/90)|          [현정](/chapter07/item48_스트림_병렬화는_주의해서_적용하라.md)           
 
 ### 8장. 메서드
 | 아이템 | 발표자료
 :---: | :---:
-아이템 49. 매개변수가 유효한지 검사하라]|
+[아이템 49. 매개변수가 유효한지 검사하라](https://github.com/hhplus9-6team/effective-java-study/issues/116)|            [노아](/chapter08/item49_매개변수가_유효한지_검사하라.md)  
 [아이템 50. 적시에 방어적 복사본을 만들라](https://github.com/hhplus9-6team/effective-java-study/issues/97)|[현정](/chapter08/item50_적시에_방어적_복사본을_만들라.md)
 [아이템 51. 메서드 시그니처를 신중히 설계하라](https://github.com/hhplus9-6team/effective-java-study/issues/98)|[윤경](/chapter08/item51_메서드_시그니처를_신중히_설계하라.md)
 아이템 52. 다중정의는 신중히 사용하라]|
@@ -95,16 +95,16 @@
 ### 9장. 일반적인 프로그래밍 원칙
 | 아이템 | 발표자료
 :---: | :---:
-아이템 57. 지역변수의 범위를 최소화하라]|
+[아이템 57. 지역변수의 범위를 최소화하라](https://github.com/hhplus9-6team/effective-java-study/issues/119)|            [노아](/chapter09/item57_지역변수의_범위를_최소화하라.md)  
 아이템 58. 전통적인 for 문보다는 for-each 문을 사용하라]|
-아이템 59. 라이브러리를 익히고 사용하라]|
+[아이템 59. 라이브러리를 익히고 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/111)|[다은](/chapter09/item59_라이브러리를_익히고_사용하라.md)
 [아이템 60. 정확한 답이 필요하다면 float와 double은 피하라](https://github.com/hhplus9-6team/effective-java-study/issues/112)|[준아](/chapter09/item60_정확한_답이_필요하다면_float와_double은_피하라.md)
 아이템 61. 박싱된 기본 타입보다는 기본 타입을 사용하라]|
 [아이템 62. 다른 타입이 적절하다면 문자열 사용을 피하라](https://github.com/hhplus9-6team/effective-java-study/issues/122)|[준아](/chapter09/item62_다른_타입이_적절하다면_문자열_사용을_피하라.md)
 아이템 63. 문자열 연결은 느리니 주의하라]|
 아이템 64. 객체는 인터페이스를 사용해 참조하라]|
-아이템 65. 리플렉션보다는 인터페이스를 사용하라]|
-아이템 66. 네이티브 메서드는 신중히 사용하라]|
+[아이템 65. 리플렉션보다는 인터페이스를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/125)|[윤경](/chapter09/item65_리플렉션보다는_인터페이스를_사용하라.md)
+[아이템 66. 네이티브 메서드는 신중히 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/126)|[다은](/chapter09/item66_네이티브_메서드는_신중히_사용하라.md)
 아이템 67. 최적화는 신중히 하라]|
 아이템 68. 일반적으로 통용되는 명명 규칙을 따르라]|
 
