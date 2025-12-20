@@ -55,15 +55,46 @@ public class StopThread {
 }
 ```
 
-#### 왜 끝나지 않을 수 있나?
-- 동기화가 없으면 가상머신이 최적화를 하면서 `stopRequested` 읽기를 **루프 밖으로 끌어올리는(hoising)** 식의 변형이 일어날 수 있다.
-  ```java
-  if (!stopRequested) {
-    while(true)
+### 무슨 일이 벌어지나? (가시성 + JIT 최적화 관점)
+
+이 코드는 `stopRequested`를 여러 스레드가 공유하지만, 그 접근이 동기화(`synchronized`)나 `volatile` 없이 이뤄져서
+자바 메모리 모델(JMM)에서 **"보이는 값(visibility)"** 이 보장되지 않기 때문에 끝나지 않을 수 있다.
+
+- main 스레드가 `stopRequested = true;`로 값을 바꿔도, backgroundThread는 그 변경을 **영원히 못 볼 수 있다.**
+
+이유는 크게 2가지가 겹친다.
+
+#### 1) 가시성(visibility) 문제: 각 스레드는 “자기 메모리처럼” 볼 수 있음
+
+JVM/CPU는 성능을 위해 값을 레지스터/코어 캐시에 올려두고 재사용할 수 있다.
+동기화(`synchronized`)나 `volatile` 같은 **가시성 보장 장치**가 없으면,
+backgroundThread는 `stopRequested`를 메인 메모리에서 다시 읽지 않고 **캐시에 있는 옛 값(false)** 만 계속 사용할 수 있다.
+
+즉, main이 `true`로 바꿨다는 사실이 다른 스레드에 **전파된다는 보장 자체가 없다.**
+
+#### 2) 컴파일러/JIT 최적화: 루프 밖으로 “읽기”를 빼버릴 수 있음(hoisting)
+
+동기화가 없으면 JVM은 “이 값이 다른 스레드에서 바뀔 수 있다”는 제약을 덜 받기 때문에,
+개념적으로 다음과 같은 최적화를 할 수도 있다:
+
+```java
+boolean cached = stopRequested; // 한 번만 읽음(false)
+while (!cached) {
+    i++;
+}
+```
+
+같은 현상을 더 직관적으로 풀어쓰면 아래처럼 이해할 수도 있다(의미상 동일):
+
+```java
+if (!stopRequested) {
+    while (true) {
         i++;
-  }
-  ```
-  - 결과적으로 `stopRequested`를 다시 읽지 않는 루프가 되어, 값이 바뀌어도 끝나지 않을 수 있다.
+    }
+}
+```
+
+- 결과적으로 `stopRequested`를 다시 읽지 않는 루프가 되어, 값이 바뀌어도 끝나지 않을 수 있다.
 
 ### 해결 1) 읽기/쓰기 모두를 `synchronized`로 보호
 ```java
@@ -140,7 +171,6 @@ public static long generateSerialNumber() {
 }
 ```
 
----
 
 ## 결론: 가장 좋은 방법은 “공유하지 않는 것”
 
