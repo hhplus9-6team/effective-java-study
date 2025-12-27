@@ -109,11 +109,25 @@ o.update() 안에서 Thread.sleep(1초)
 #### (2) 교착 상태
 
 ```
-update() 안에서 다른 락을 잡고,
-그 락을 잡은 다른 스레드가 다시 이 객체 접근
+// Thread1
+1. Subject.notifyObservers() 호출
+2. Subject의 락 획득
+3. observers 순회 중
+4. observer.update(this) 호출
+   → 이 시점에 Subject의 락은 아직 잡힌 상태
+```
+```
+// Thread2
+5. update() 안에서 subject.removeObserver() 호출
+6. removeObserver()는 synchronized
+7. 하지만 Subject의 락은 이미 Thread-1이 잡고 있음
+8. → 대기
 ```
 
-- 서로 기다리며 멈춤
+- Thread-1은 update()가 끝나길 기다림
+- Thread-2는 Subject 락이 풀리길 기다림
+
+    → 서로 영원히 기다림 (deadlock)
 
 #### (3) ConcurrentModificationException
 
