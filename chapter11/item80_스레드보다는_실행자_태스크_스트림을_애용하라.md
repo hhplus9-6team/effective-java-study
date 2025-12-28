@@ -59,7 +59,7 @@ exec.shutdown();
 
 대부분은 `Executors`의 정적 팩터리로 충분하다.
 
-** `ThreadPoolExecutor`를 직접 써서 스레드 풀 동작을 결정하는 거의 모든 속성을 설정할 수 있다.
+- 필요하면 `ThreadPoolExecutor`를 직접 써서 스레드 풀 동작을 결정하는 거의 모든 속성을 설정할 수 있다.
 
 
 ## 풀 선택 주의: `newCachedThreadPool()`
@@ -82,10 +82,51 @@ exec.shutdown();
 
 이 프레임워크에서 작업 단위를 나타내는 핵심 추상 개념이 **태스크**다.
 
-- `Runnable`
-- `Callable` : `Runnable`과 비슷하지만 **값을 반환**하고, **임의의 예외를 던질 수 있다**
+### `Runnable`이란?
+- **입력 없음 / 반환값 없음**인 작업 단위
+- 메서드는 `void run()`
+- 체크 예외(checked exception)를 던질 수 없어서(시그니처에 throws 없음) 보통 내부에서 처리하거나 런타임 예외로 감싸야 한다.
 
-태스크를 수행하는 일반적인 메커니즘이 **실행자 서비스**다.
+```java
+Runnable task = () -> {
+    // 해야 할 일
+    System.out.println("hello");
+};
+
+ExecutorService exec = Executors.newSingleThreadExecutor();
+exec.execute(task); // 반환값 없음
+exec.shutdown();
+```
+
+### `Callable<V>`란?
+`Runnable`과 비슷하지만
+- **값을 반환**할 수 있다 (`V call()`)
+- **임의의 예외를 던질 수 있다** (`throws Exception`)
+
+
+```java
+Callable<Integer> task = () -> {
+    // 계산/조회 등
+    return 42;
+};
+
+ExecutorService exec = Executors.newSingleThreadExecutor();
+Future<Integer> f = exec.submit(task);
+
+try {
+    Integer v = f.get();
+    System.out.println(v);
+} finally {
+    exec.shutdown();
+}
+```
+
+### 정리
+- **결과가 필요 없다** → `Runnable`
+- **결과가 필요하다**(또는 작업 중 예외를 호출자에게 전달하고 싶다) → `Callable` + `Future`
+
+> `Runnable`도 `submit()`으로 제출할 수 있지만(그래서 `Future<?>`를 받을 수 있지만),
+> “결과가 핵심인 작업”은 보통 처음부터 `Callable`로 표현하는 편이 이해하기 쉽다.
 
 태스크 수행을 실행자 서비스에 맡기면
 - 원하는 **태스크 수행 정책**을 선택할 수 있고
