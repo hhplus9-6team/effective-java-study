@@ -105,7 +105,7 @@
 아이템 64. 객체는 인터페이스를 사용해 참조하라]|
 [아이템 65. 리플렉션보다는 인터페이스를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/125)|[윤경](/chapter09/item65_리플렉션보다는_인터페이스를_사용하라.md)
 [아이템 66. 네이티브 메서드는 신중히 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/126)|[다은](/chapter09/item66_네이티브_메서드는_신중히_사용하라.md)
-아이템 67. 최적화는 신중히 하라]|
+[아이템 67. 최적화는 신중히 하라](https://github.com/hhplus9-6team/effective-java-study/issues/133)|[다은](/chapter09/item67_최적화는_신중히_하라.md)
 아이템 68. 일반적으로 통용되는 명명 규칙을 따르라]|
 
 ### 10장. 예외
@@ -114,7 +114,7 @@
 아이템 69. 예외는 진짜 예외 상황에만 사용하라|
 [아이템 70. 복구할 수 있는 상황에는 검사 예외를, 프로그래밍 오류에는 런타임 예외를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/136)|[준아](/chapter10/item70_복구할_수_있는_상황에는_검사_예외를,_프로그래밍_오류에는_런타임_예외를_사용하라.md)
 아이템 71. 필요 없는 검사 예외 사용은 피하라|
-아이템 72. 표준 예외를 사용하라|
+[아이템 72. 표준 예외를 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/138)|[다은](/chapter10/item72_표준_예외를_사용하라.md)
 아이템 73. 추상화 수준에 맞는 예외를 던지라|
 아이템 74. 메서드가 던지는 모든 예외를 문서화하라|
 아이템 75. 예외의 상세 메시지에 실패 관련 정보를 담으라|
@@ -124,9 +124,9 @@
 ### 11장. 동시성
 | 아이템 | 발표자료
 :---: | :---:
-아이템 78. 공유 중인 가변 데이터는 동기화해 사용하라 |
+[아이템 78. 공유 중인 가변 데이터는 동기화해 사용하라](https://github.com/hhplus9-6team/effective-java-study/issues/150)|[다은](/chapter11/item78_공유_중인_가변_데이터는_동기화해_사용하라.md)
 [아이템 79. 과도한 동기화는 피하라](https://github.com/hhplus9-6team/effective-java-study/issues/157) | [준아](/chapter11/item79_과도한_동기화는_피하라.md)
-아이템 80. 스레드보다는 실행자, 태스크, 스트림을 애용하라 |
+[아이템 80. 스레드보다는 실행자, 태스크, 스트림을 애용하라](https://github.com/hhplus9-6team/effective-java-study/issues/158)|[다은](/chapter11/item80_스레드보다는_실행자_태스크_스트림을_애용하라.md)
 아이템 81. wait와 notify보다는 동시성 유틸리티를 애용하라 |
 아이템 82. 스레드 안전성 수준을 문서화하라 |
 아이템 83. 지연 초기화는 신중히 사용하라 |
@@ -140,7 +140,7 @@
 아이템 87. 커스텀 직렬화 형태를 고려해보라 | 
 아이템 88. readObject 메서드는 방어적으로 작성하라 | 
 아이템 89. 인스턴스 수를 통제해야 한다면 readResolve보다는 열거 타입을 사용하라| 
-아이템 90. 직렬화된 인스턴스 대신 직렬화 프록시 사용을 검토하라 |
+[아이템 90. 직렬화된 인스턴스 대신 직렬화 프록시 사용을 검토하라](https://github.com/hhplus9-6team/effective-java-study/issues/174)|[다은](/chapter12/item90_직렬화된_인스턴스_대신_직렬화_프록시_사용을_검토하라.md)
 
 ## Members
 
