@@ -1,19 +1,46 @@
 # item90. 직렬화된 인스턴스 대신 직렬화 프록시 사용을 검토하라
 
 > [!IMPORTANT]
-> `Serializable`을 구현하는 순간, **생성자(정상적인 객체 생성 메커니즘)를 거치지 않고도 인스턴스를 만들 수 있게 된다** -> **버그/보안 문제 가능성**
+> `Serializable`을 구현하는 순간, **생성자를 거치지 않고도 인스턴스를 만들 수 있게 된다** -> **버그/보안 문제 가능성**
 >
-> 이 위험을 크게 줄이는 대표 기법이 **직렬화 프록시 패턴(serialization proxy pattern)** 이다
+> 이 위험을 크게 줄이는 대표 기법이 **직렬화 프록시 패턴**이다
 
 
 ## 왜 위험해지나?
 `Serializable`을 구현하면 역직렬화가 **생성자를 우회**해 객체를 만들 수 있다
-즉, 평소라면 생성자/정적 팩터리에서 강제하던 **불변식(invariant) 검증, 방어적 복사** 같은 안전장치를 우회할 여지가 생긴다
+즉, 평소라면 생성자/정적 팩터리에서 강제하던 **불변식 검증, 방어적 복사** 같은 안전장치를 우회할 여지가 생긴다
 
-- 직렬화를 해야만 한다면, **직렬화가 객체를 ‘직접’ 만들게 두지 말고 프록시(대리 객체)를 통해서만** 복원되게 만들라
+<details>
+<summary>예제: 생성자 우회로 불변식이 깨지는 경우</summary>
+
+```java
+public class Age implements Serializable {
+    private final int value;
+
+    public Age(int value) {
+        if (value < 0) throw new IllegalArgumentException("나이는 음수일 수 없습니다");
+        this.value = value;
+    }
+}
+```
+- 생성자는 `value < 0`이면 예외를 던져 **불변식을 보장**한다
+- 하지만 역직렬화는 생성자를 거치지 않으므로, 조작된 바이트 스트림으로 `value = -100`인 객체가 만들어질 수 있다
+
+</details>
+
+** 직렬화를 해야만 한다면, **직렬화가 객체를 '직접' 만들게 두지 말고 프록시(대리 객체)를 통해서만** 복원되게 만들라
 
 
-## 직렬화 프록시 패턴이란?
+### 자바 직렬화 특수 메서드
+```java
+// 자바가 인식하는 특수 메서드들 (있으면 자동 호출)
+private void writeObject(ObjectOutputStream s)     // 직렬화 시
+private void readObject(ObjectInputStream s)       // 역직렬화 시
+private Object writeReplace()                      // 직렬화 전
+private Object readResolve()                       // 역직렬화 후
+```
+
+## 직렬화 프록시 패턴(serialization proxy pattern)이란?
 바깥(원래) 클래스의 **논리적 상태(logical state)** 를 정확히 표현하는 **중첩 클래스**를 하나 만들고,
 그 중첩 클래스를 **직렬화의 실제 대상**으로 쓰는 방식이다.
 
@@ -39,7 +66,6 @@ private static class SerializationProxy implements Serializable {
     private static final long serialVersionUID = 234098243823485285L; // 아무 값이나 상관없다(아이템 87)
 }
 ```
-
 
 ### 2) 바깥 클래스에 `writeReplace` 추가
 바깥 클래스의 인스턴스가 직렬화되려 할 때,
@@ -119,19 +145,17 @@ private Object readResolve() {
 1) **클라이언트가 멋대로 확장할 수 있는 클래스(아이템 19)** 에는 적용할 수 없다.
 
 2) **객체 그래프에 순환(cycle)이 있는 클래스**에도 적용할 수 없다.
-- 이런 객체의 메서드를 프록시의 `readResolve` 안에서 호출하려 하면
-  `ClassCastException`이 발생할 수 있다고 설명한다.
+- 이런 객체의 메서드를 프록시의 `readResolve` 안에서 호출하려 하면 `ClassCastException`이 발생할 수 있다
 - 이유: 그 시점에는 프록시만 존재하고, 실제 객체는 아직 만들어진 게 아니기 때문.
 
 ## 성능 트레이드오프
 직렬화 프록시 패턴은 강력하고 안전하지만 비용이 있다.
-책의 `Period` 예제를 실행해보면 **방어적 복사보다 14% 느렸다**고 언급한다.
+`Period` 예제를 실행해보면 **방어적 복사보다 14% 느렸다**고 언급한다.
 
 ## 핵심 정리
 - 제3자가 확장할 수 없는 클래스라면, 가능한 한 **직렬화 프록시 패턴**을 사용하자.
 - 이 패턴은 중요한 불변식을 **안정적으로 직렬화**해주는 가장 쉬운 방법일 수 있다.
 
 ## QnA
-Q1. 바깥 클래스에 `readObject`를 예외로 막아야 하는 이유는?
-
+Q1. 바깥 클래스에 `readObject`를 예외로 막아야 하는 이유는?  
 Q2. 이 패턴을 적용할 수 없는 두 가지 경우(책에서 언급)는?
